@@ -80,7 +80,9 @@ class AMapRequest
      */
     public function request()
     {
-        $this->param['data'] = json_encode($this->param['data']);
+        if(isset($this->param['data'])){
+            $this->param['data'] = json_encode($this->param['data']);
+        }
         ksort($this->param);
         $str = "";
         $n = 0;
