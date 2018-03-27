@@ -1,0 +1,36 @@
+{
+  "name": "axios/aliyun-sdk",
+  "description": "SDK for AMap API SDK",
+  "version": "0.0.1",
+  "keywords": [
+    "AMap",
+    "SDK",
+    "高德"
+  ],
+  "homepage": "https://github.com/AxiosCros/amap-api-sdk",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Axios",
+      "email": "axioscros@aliyun.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/AxiosCros/amap-api-sdk/issues"
+  },
+  "require": {
+    "php": ">=7.0",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "composer/composer": "1.0.*@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "amap\\sdk\\": "library"
+    },
+    "files":[
+      "help.php"
+    ]
+  }
+}
