@@ -35,7 +35,7 @@ class AMapRequest
         $this->action = $action;
     }
 
-    public function setAction($action)
+    protected function setAction($action)
     {
         $this->action = $action;
     }
