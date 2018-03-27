@@ -4,38 +4,33 @@
  *
  * @email: axiosleo@foxmail.com
  * @blog:  http://hanxv.cn
- * @datetime: 2018/3/27 17:02
+ * @datetime: 2018/3/27 17:34
  */
 
-namespace amap\sdk\CloudMap;
+namespace amap\sdk\CloudMap\request;
 
 use amap\sdk\core\AMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\exception\FileNotExistException;
 
-class CloudMapRequest extends AMapRequest
+/**
+ * Class Data
+ * @package amap\sdk\CloudMap\request
+ * @method $this create()
+ * @method $this createByExcel()
+ * @method $this update()
+ * @method $this delete()
+ * @method $this importStatus()
+ */
+class Data extends AMapRequest
 {
     protected $actionArray = [
         'create'        => 'datamanage/data/create',
         'createByExcel' => 'datamanage/data/batchcreate',
         'update'        => 'datamanage/data/update',
         'delete'        => 'datamanage/data/delete',
-        'importStatus'  => 'datamanage/batch/importstatus'
+        'importStatus'  => 'datamanage/batch/importstatus',
     ];
-
-    /**
-     * CloudMapRequest constructor.
-     * @param $action
-     * @throws CloudMapException
-     * @throws \amap\sdk\core\AMapException
-     */
-    public function __construct($action)
-    {
-        if(!isset($this->actionArray[$action])){
-            throw new CloudMapException("action not exist");
-        }
-        parent::__construct($this->actionArray[$action]);
-    }
 
     /**
      * @param $table_id
@@ -78,5 +73,20 @@ class CloudMapRequest extends AMapRequest
     public function setBatchid($batchid){
         $this->setParam('batchid',$batchid);
         return $this;
+    }
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return $this
+     * @throws CloudMapException
+     */
+    public function __call($name, $arguments)
+    {
+        if(!isset($this->actionArray[$name])){
+            throw new CloudMapException("action not exist");
+        }
+        $this->setAction($this->actionArray[$name]);
+        RETURN $this;
     }
 }

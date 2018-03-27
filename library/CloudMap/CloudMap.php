@@ -8,28 +8,35 @@
  */
 namespace amap\sdk\CloudMap;
 
+use amap\sdk\CloudMap\request\Data;
+use amap\sdk\CloudMap\request\Nearby;
+use amap\sdk\CloudMap\request\Search;
+use amap\sdk\core\AMapException;
+
 /**
  * Class CloudMap
  * API Document : http://lbs.amap.com/api/yuntu/reference/cloudstorage
  * @package amap\sdk\CloudMap
- * @method static CloudMapRequest create()
- * @method static CloudMapRequest createByExcel()
- * @method static CloudMapRequest update()
- * @method static CloudMapRequest delete()
- * @method static CloudMapRequest importStatus()
+ * @method static Data data()
+ * @method static Nearby nearby()
+ * @method static Search search()
  */
 class CloudMap
 {
     /**
      * @param $name
      * @param $arguments
-     * @return CloudMapRequest
-     * @throws \amap\sdk\core\AMapException
-     * @throws \amap\sdk\core\exception\CloudMapException
+     * @return mixed
+     * @throws AMapException
      */
     public static function __callStatic($name, $arguments)
     {
-        $instance = new CloudMapRequest($name);
+        $class_name = ucfirst(strtolower($name));
+        $class_name = __NAMESPACE__ . '\\request\\'.$class_name;
+        if(!class_exists($class_name)){
+            throw new AMapException("Class not exist");
+        }
+        $instance = new $class_name($arguments);
         return $instance;
     }
 }
