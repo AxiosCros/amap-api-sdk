@@ -33,7 +33,6 @@ $data = [
 //Get Request Instance
 $request = CloudMap::data()->create();
 
-
 $request->setTableId($table_id);
 $request->setLocationType(1);
 $request->setData($data);
