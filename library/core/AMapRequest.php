@@ -72,6 +72,7 @@ class AMapRequest
             throw new FileNotExistException($file_path . " not exist");
         }
         $this->file_path =$file_path;
+        $this->param['file'] = file_get_contents($file_path);
     }
 
     /**
