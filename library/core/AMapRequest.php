@@ -10,7 +10,7 @@
 namespace amap\sdk\core;
 
 use amap\sdk\AMap;
-use GuzzleHttp\Client;
+use amap\sdk\core\exception\FileNotExistException;
 
 class AMapRequest
 {
@@ -18,25 +18,26 @@ class AMapRequest
 
     protected $action = "";
 
-    protected $data = [];
-
     protected $sig = "";
 
     protected $param = [];
 
+    protected $file_path;
+
     /**
-     * AMapRequest constructor.
+     * AMapRequest constructor
+     * @param string $action
      * @throws AMapException
      */
-    public function __construct()
+    public function __construct($action)
     {
         $this->param['key'] = AMap::key();
+        $this->action = $action;
     }
 
-    protected function setAction($action)
+    public function setAction($action)
     {
         $this->action = $action;
-        return $this;
     }
 
     public function setParam($key, $value){
@@ -44,12 +45,41 @@ class AMapRequest
     }
 
     /**
-     * @return AMapResponse
+     * @param string $key
+     * @return array|mixed
      * @throws AMapException
+     */
+    public function params($key = null){
+        $param = $this->param;
+
+        if(is_null($key)){
+            return $param;
+        }
+
+        if(!isset($param[$key])){
+            throw new AMapException($key. " param not exist");
+        }
+
+        return $param[$key];
+    }
+
+    /**
+     * @param $file_path
+     * @throws FileNotExistException
+     */
+    public function setFile($file_path){
+        if(!file_exists($file_path)){
+            throw new FileNotExistException($file_path . " not exist");
+        }
+        $this->file_path =$file_path;
+    }
+
+    /**
+     * @return AMapResponse
      */
     public function request()
     {
-        $this->param['data'] = json_encode($this->data);
+        $this->param['data'] = json_encode($this->param['data']);
         ksort($this->param);
         $str = "";
         $n = 0;
@@ -62,31 +92,7 @@ class AMapRequest
         }
         $str .= AMap::secret();
         $sig = md5($str);
-        $request_param['sig'] = $sig;
-        return self::curl($this->request_base_url, $this->action, $request_param);
-    }
-
-    private static function curl($domain, $path, $data = [], $method = "POST", $header = [])
-    {
-        $domain = "http://" . $domain;
-        $client = new Client(['base_uri' => $domain]);
-        $result = $client->request($method, $path, [
-            'http_errors' => false,
-            'form_params' => $data,
-            'headers' => $header
-        ]);
-        $body = $result->getBody();
-        $response = new AMapResponse();
-        $response->setHeader($result->getHeaders());
-        $body = (string)$body;
-        $content_type = $result->getHeaderLine("content-type");
-        if (strpos($content_type, "xml") !== false) {
-            $body = AMapHelper::xmlToArray($body);
-        } else if (strpos($content_type, "json") !== false) {
-            $body = AMapHelper::jsonToArray($body);
-        }
-        $response->setBody($body);
-        $response->setStatus($result->getStatusCode());
-        return $response;
+        $this->param['sig'] = $sig;
+        return AMapHelper::curl($this->request_base_url, $this->action, $this->param);
     }
 }

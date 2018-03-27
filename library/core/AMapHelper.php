@@ -9,8 +9,8 @@
 
 namespace amap\sdk\core;
 
-
 use amap\sdk\core\help\ArrayToXML;
+use GuzzleHttp\Client;
 
 class AMapHelper
 {
@@ -58,5 +58,29 @@ class AMapHelper
             $bool = false;
         }
         return $bool ? "True":"False";
+    }
+
+    public static function curl($domain, $path, $data = [], $method = "POST", $header = [])
+    {
+        $domain = "http://" . $domain;
+        $client = new Client(['base_uri' => $domain]);
+        $result = $client->request($method, $path, [
+            'http_errors' => false,
+            'form_params' => $data,
+            'headers' => $header
+        ]);
+        $body = $result->getBody();
+        $response = new AMapResponse();
+        $response->setHeader($result->getHeaders());
+        $body = (string)$body;
+        $content_type = $result->getHeaderLine("content-type");
+        if (strpos($content_type, "xml") !== false) {
+            $body = AMapHelper::xmlToArray($body);
+        } else if (strpos($content_type, "json") !== false) {
+            $body = AMapHelper::jsonToArray($body);
+        }
+        $response->setBody($body);
+        $response->setStatus($result->getStatusCode());
+        return $response;
     }
 }
