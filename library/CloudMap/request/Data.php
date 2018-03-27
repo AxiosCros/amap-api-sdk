@@ -9,6 +9,7 @@
 
 namespace amap\sdk\CloudMap\request;
 
+use amap\sdk\core\AMapException;
 use amap\sdk\core\AMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\exception\FileNotExistException;
@@ -55,8 +56,13 @@ class Data extends AMapRequest
      * @param $file_path
      * @return $this
      * @throws FileNotExistException
+     * @throws AMapException
      */
     public function setFilePath($file_path){
+        $ext = pathinfo($file_path,PATHINFO_EXTENSION);
+        if($ext !== 'csv'){
+            throw new AMapException("file extension must be 'csv'");
+        }
         $this->setFile($file_path);
         return $this;
     }

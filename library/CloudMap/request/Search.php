@@ -14,7 +14,13 @@ use amap\sdk\core\AMapRequest;
 class Search extends AMapRequest
 {
     protected $actionArray = [
-        'local'       => 'datasearch/local',
-        'around'      => 'datasearch/around',
+        'local' => 'datasearch/local',
+        'around' => 'datasearch/around',
+        'polygon' => 'datasearch/polygon',
+        'id' => 'datasearch/id',
+        'dataList' => 'datamanage/data/list',
+        'statisticsProvince' => 'datasearch/statistics/province',
+        'statisticsCity' => 'datasearch/statistics/city',
+        'statisticsDistrict' => 'datasearch/statistics/district'
     ];
 }
