@@ -48,15 +48,10 @@ class AMap
     /**
      * @param null $secret
      * @return string
-     * @throws AMapException
      */
     public static function secret($secret = null){
         if(is_null($secret)){
             return self::$secret;
-        }
-
-        if(!is_string($secret)){
-            throw new AMapException("secret error , must be string!");
         }
 
         self::$secret = $secret;
