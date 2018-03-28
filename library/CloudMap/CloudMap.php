@@ -11,7 +11,7 @@ namespace amap\sdk\CloudMap;
 use amap\sdk\CloudMap\request\Data;
 use amap\sdk\CloudMap\request\Nearby;
 use amap\sdk\CloudMap\request\Search;
-use amap\sdk\core\AMapException;
+use amap\sdk\core\traits\ClientTrait;
 
 /**
  * Class CloudMap
@@ -23,20 +23,5 @@ use amap\sdk\core\AMapException;
  */
 class CloudMap
 {
-    /**
-     * @param $name
-     * @param $arguments
-     * @return mixed
-     * @throws AMapException
-     */
-    public static function __callStatic($name, $arguments)
-    {
-        $class_name = ucfirst(strtolower($name));
-        $class_name = __NAMESPACE__ . '\\request\\'.$class_name;
-        if(!class_exists($class_name)){
-            throw new AMapException("Class not exist");
-        }
-        $instance = new $class_name($arguments);
-        return $instance;
-    }
+    use ClientTrait;
 }
