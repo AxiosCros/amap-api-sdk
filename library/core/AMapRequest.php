@@ -24,6 +24,8 @@ class AMapRequest
 
     protected $file_path;
 
+    protected $method = "POST";
+
     /**
      * AMapRequest constructor
      * @param string $action
@@ -42,6 +44,10 @@ class AMapRequest
     public function setParam($key, $value)
     {
         $this->param[$key] = $value;
+    }
+
+    protected function setMethod($method){
+        $this->method = strtoupper($method);
     }
 
     /**
@@ -93,7 +99,7 @@ class AMapRequest
             $this->param['sig'] = $sig;
         }
 
-        return AMapHelper::curl($this->request_base_url, $this->action, $this->param);
+        return AMapHelper::curl($this->request_base_url, $this->action, $this->param, $this->method);
     }
 
     protected function formatParam($param){
@@ -108,5 +114,17 @@ class AMapRequest
             $n++;
         }
         return $str;
+    }
+
+    public function buildUrl()
+    {
+        $domain = "http://" . $this->request_base_url;
+        $param_string = $this->formatParam($this->param);
+        if (AMap::signSwitch()) {
+            $str = $param_string . AMap::secret();
+            $sig = md5($str);
+            $param_string .= "&sig=" . $sig;
+        }
+        return $domain . $this->action . "?" . $param_string;
     }
 }
