@@ -34,7 +34,7 @@ class AMap
             return self::$sign_switch;
         }
 
-        self::$key = $sign_switch;
+        self::$sign_switch = $sign_switch;
 
         return self::$sign_switch;
     }
