@@ -17,11 +17,26 @@ class AMap
 
     private static $secret;
 
-    public static $request_base_url = "http://yuntuapi.amap.com/";
+    private static $sign_switch;
 
-    public static function auth($key = null, $secret = null){
+    const OpenSign = 1;
+
+    const CloseSign = 0;
+
+    public static function auth($key = null, $secret = null, $sign_switch = self::OpenSign){
         self::$key = self::key($key);
         self::$secret = self::secret($secret);
+        self::$sign_switch = self::signSwitch($sign_switch);
+    }
+
+    public static function signSwitch($sign_switch = null){
+        if(is_null($sign_switch)){
+            return self::$sign_switch;
+        }
+
+        self::$key = $sign_switch;
+
+        return self::$sign_switch;
     }
 
     /**
