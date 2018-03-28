@@ -9,7 +9,7 @@
 
 namespace amap\sdk\CloudMap\request;
 
-use amap\sdk\core\AMapRequest;
+use amap\sdk\CloudMap\CloudMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\traits\RequestTrait;
 
@@ -70,7 +70,7 @@ class Search
  * @method $this setProvince($province)
  * @method $this setCity($city)
  */
-class SearchRequest extends AMapRequest{
+class SearchRequest extends CloudMapRequest {
     use RequestTrait;
 
     public function __construct(string $action)

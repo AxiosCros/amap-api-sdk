@@ -9,7 +9,7 @@
 
 namespace amap\sdk\CloudMap\request;
 
-use amap\sdk\core\AMapRequest;
+use amap\sdk\CloudMap\CloudMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\traits\RequestTrait;
 
@@ -49,7 +49,7 @@ class Nearby
  * @method $this setSearchType($search_type)
  * @method $this setTimeRange($time_range)
  */
-class NearByRequest extends AMapRequest{
+class NearByRequest extends CloudMapRequest {
     use RequestTrait;
 
     public function __construct(string $action)

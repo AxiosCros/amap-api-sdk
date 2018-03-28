@@ -9,8 +9,8 @@
 
 namespace amap\sdk\CloudMap\request;
 
+use amap\sdk\CloudMap\CloudMapRequest;
 use amap\sdk\core\AMapException;
-use amap\sdk\core\AMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\exception\FileNotExistException;
 use amap\sdk\core\traits\RequestTrait;
@@ -62,7 +62,7 @@ class Data
  * @method $this setData($data)
  * @method $this setBatchid($batchid)
  */
-class DataRequest extends AMapRequest{
+class DataRequest extends CloudMapRequest {
 
     use RequestTrait;
 
