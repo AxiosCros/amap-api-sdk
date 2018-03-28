@@ -14,7 +14,7 @@ use amap\sdk\core\exception\FileNotExistException;
 
 class AMapRequest
 {
-    protected $request_base_url = "yuntuapi.amap.com/";
+    protected $request_base_url = "";
 
     protected $action = "";
 
@@ -39,7 +39,8 @@ class AMapRequest
         $this->action = $action;
     }
 
-    public function setParam($key, $value){
+    public function setParam($key, $value)
+    {
         $this->param[$key] = $value;
     }
 
@@ -48,15 +49,16 @@ class AMapRequest
      * @return array|mixed
      * @throws AMapException
      */
-    public function params($key = null){
+    public function params($key = null)
+    {
         $param = $this->param;
 
-        if(is_null($key)){
+        if (is_null($key)) {
             return $param;
         }
 
-        if(!isset($param[$key])){
-            throw new AMapException($key. " param not exist");
+        if (!isset($param[$key])) {
+            throw new AMapException($key . " param not exist");
         }
 
         return $param[$key];
@@ -66,11 +68,12 @@ class AMapRequest
      * @param $file_path
      * @throws FileNotExistException
      */
-    protected function setFile($file_path){
-        if(!file_exists($file_path)){
+    protected function setFile($file_path)
+    {
+        if (!file_exists($file_path)) {
             throw new FileNotExistException($file_path . " not exist");
         }
-        $this->file_path =$file_path;
+        $this->file_path = $file_path;
         $this->param['file'] = file_get_contents($file_path);
     }
 
@@ -79,7 +82,7 @@ class AMapRequest
      */
     public function request()
     {
-        if(isset($this->param['data'])){
+        if (isset($this->param['data'])) {
             $this->param['data'] = json_encode($this->param['data']);
         }
         ksort($this->param);
@@ -95,6 +98,7 @@ class AMapRequest
         $str .= AMap::secret();
         $sig = md5($str);
         $this->param['sig'] = $sig;
+
         return AMapHelper::curl($this->request_base_url, $this->action, $this->param);
     }
 }
