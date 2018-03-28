@@ -13,19 +13,22 @@ use amap\sdk\core\AMapException;
 use amap\sdk\core\AMapRequest;
 use amap\sdk\core\exception\CloudMapException;
 use amap\sdk\core\exception\FileNotExistException;
+use amap\sdk\core\traits\RequestTrait;
 
 /**
  * Class Data
  * @package amap\sdk\CloudMap\request
- * @method $this create()
- * @method $this createByExcel()
- * @method $this update()
- * @method $this delete()
- * @method $this importStatus()
+ * @method DataRequest createTable()
+ * @method DataRequest create()
+ * @method DataRequest createByExcel()
+ * @method DataRequest update()
+ * @method DataRequest delete()
+ * @method DataRequest importStatus()
  */
-class Data extends AMapRequest
+class Data
 {
     protected $actionArray = [
+        'createTable'   => 'datamanage/table/create',
         'create'        => 'datamanage/data/create',
         'createByExcel' => 'datamanage/data/batchcreate',
         'update'        => 'datamanage/data/update',
@@ -34,12 +37,42 @@ class Data extends AMapRequest
     ];
 
     /**
-     * @param $table_id
-     * @return $this
+     * @param $name
+     * @param $arguments
+     * @return DataRequest
+     * @throws CloudMapException
+     * @throws AMapException
      */
-    public function setTableId($table_id){
-        $this->setParam("tableid",$table_id);
-        return $this;
+    public function __call($name, $arguments)
+    {
+        if(!isset($this->actionArray[$name])){
+            throw new CloudMapException("action not exist");
+        }
+        $Class = new DataRequest($this->actionArray[$name]);
+        return $Class;
+    }
+}
+
+/**
+ * Class DataRequest
+ * @package amap\sdk\CloudMap\request
+ * @method $this setIds($ids)
+ * @method $this setName($name)
+ * @method $this setTableId($table_id)
+ * @method $this setData($data)
+ * @method $this setBatchid($batchid)
+ */
+class DataRequest extends AMapRequest{
+
+    use RequestTrait;
+
+    /**
+     * DataRequest constructor.
+     * @param string $action
+     */
+    public function __construct(string $action)
+    {
+        parent::__construct($action);
     }
 
     /**
@@ -65,34 +98,5 @@ class Data extends AMapRequest
         }
         $this->setFile($file_path);
         return $this;
-    }
-
-    /**
-     * @param $data
-     * @return $this
-     */
-    public function setData($data){
-        $this->setParam('data',$data);
-        return $this;
-    }
-
-    public function setBatchid($batchid){
-        $this->setParam('batchid',$batchid);
-        return $this;
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     * @return $this
-     * @throws CloudMapException
-     */
-    public function __call($name, $arguments)
-    {
-        if(!isset($this->actionArray[$name])){
-            throw new CloudMapException("action not exist");
-        }
-        $this->setAction($this->actionArray[$name]);
-        RETURN $this;
     }
 }

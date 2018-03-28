@@ -11,24 +11,40 @@ namespace amap\sdk\CloudMap\request;
 
 use amap\sdk\core\AMapRequest;
 use amap\sdk\core\exception\CloudMapException;
+use amap\sdk\core\traits\RequestTrait;
 
-class Nearby extends AMapRequest
+/**
+ * Class Nearby
+ * @package amap\sdk\CloudMap\request
+ * @method NearByRequest around()
+ */
+class Nearby
 {
     protected $actionArray = [
         'around'      => 'nearby/around',
     ];
 
     /**
-     * CloudMapRequest constructor.
-     * @param $action
+     * @param $name
+     * @param $arguments
+     * @return NearByRequest
      * @throws CloudMapException
-     * @throws \amap\sdk\core\AMapException
      */
-    public function __construct($action)
+    public function __call($name, $arguments)
     {
-        if(!isset($this->actionArray[$action])){
+        if(!isset($this->actionArray[$name])){
             throw new CloudMapException("action not exist");
         }
-        parent::__construct($this->actionArray[$action]);
+        $Class = new NearByRequest($this->actionArray[$name]);
+        return $Class;
+    }
+}
+
+class NearByRequest extends AMapRequest{
+    use RequestTrait;
+
+    public function __construct(string $action)
+    {
+        parent::__construct($action);
     }
 }
