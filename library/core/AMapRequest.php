@@ -27,7 +27,6 @@ class AMapRequest
     /**
      * AMapRequest constructor
      * @param string $action
-     * @throws AMapException
      */
     public function __construct($action)
     {
@@ -67,7 +66,7 @@ class AMapRequest
      * @param $file_path
      * @throws FileNotExistException
      */
-    public function setFile($file_path){
+    protected function setFile($file_path){
         if(!file_exists($file_path)){
             throw new FileNotExistException($file_path . " not exist");
         }
