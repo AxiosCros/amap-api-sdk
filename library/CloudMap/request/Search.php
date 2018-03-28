@@ -25,7 +25,7 @@ use amap\sdk\core\traits\RequestTrait;
  * @method SearchRequest statisticsCity()
  * @method SearchRequest statisticsDistrict()
  */
-class Search extends AMapRequest
+class Search
 {
     protected $actionArray = [
         'local' => 'datasearch/local',
@@ -54,11 +54,31 @@ class Search extends AMapRequest
     }
 }
 
+/**
+ * Class SearchRequest
+ * @package amap\sdk\CloudMap\request
+ * @method $this setKeywords($keywords)
+ * @method $this setFilter($filter)
+ * @method $this setLimit($limit)
+ * @method $this setPage($page)
+ * @method $this setCenter($center)
+ * @method $this setRadius($radius)
+ * @method $this setSortRule($sort_rule)
+ * @method $this setPolygon($polygon)
+ * @method $this setTableId($table_id)
+ * @method $this setCountry($country)
+ * @method $this setProvince($province)
+ * @method $this setCity($city)
+ */
 class SearchRequest extends AMapRequest{
     use RequestTrait;
 
     public function __construct(string $action)
     {
         parent::__construct($action);
+    }
+
+    public function setId($id){
+        $this->setParam("_id",$id);
     }
 }

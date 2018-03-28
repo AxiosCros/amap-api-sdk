@@ -40,6 +40,15 @@ class Nearby
     }
 }
 
+/**
+ * Class NearByRequest
+ * @package amap\sdk\CloudMap\request
+ * @method $this setCenter($center)
+ * @method $this setRadius($radius)
+ * @method $this setLimit($limit)
+ * @method $this setSearchType($search_type)
+ * @method $this setTimeRange($time_range)
+ */
 class NearByRequest extends AMapRequest{
     use RequestTrait;
 
