@@ -4,7 +4,7 @@
  *
  * @email: axiosleo@foxmail.com
  * @blog:  http://hanxv.cn
- * @datetime: 2018/3/28 15:28
+ * @datetime: 2018/3/28 16:53
  */
 
 namespace amap\sdk\RestAPI\request;
@@ -13,18 +13,18 @@ use amap\sdk\core\traits\RequestTrait;
 use amap\sdk\RestAPI\RestAPIRequest;
 
 /**
- * Class StaticMapRequest
+ * Class InputTipsRequest
  * @package amap\sdk\RestAPI\request
+ * @method $this setKeywords($keywords)
+ * @method $this setType($type)
  * @method $this setLocation($location)
- * @method $this setZoom($zoom)
- * @method $this setSize($size)
- * @method $this setScale($scale)
- * @method $this setMarkers($markers)
- * @method $this setLabels($labels)
- * @method $this setPaths($paths)
- * @method $this setTraffic($traffic)
+ * @method $this setCity($city)
+ * @method $this setCityLimit($city_limit)
+ * @method $this setDataType($data_type)
+ * @method $this setOutput($output)
+ * @method $this setCallback($callback)
  */
-class StaticMapRequest extends RestAPIRequest
+class InputTipsRequest extends RestAPIRequest
 {
     use RequestTrait;
 
