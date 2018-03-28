@@ -9,10 +9,7 @@
 
 namespace amap\sdk\RestAPI\request;
 
-
 use amap\sdk\core\exception\RestAPIException;
-use amap\sdk\core\traits\RequestTrait;
-use amap\sdk\RestAPI\RestAPIRequest;
 
 class Direction
 {
@@ -41,19 +38,3 @@ class Direction
     }
 }
 
-/**
- * Class DirectionRequest
- * @package amap\sdk\RestAPI\request
- * @method $this setOrigin($origin)
- * @method $this setDestination($destination)
- * @method $this setOutput($output)
- * @method $this setCallback($callback)
- */
-class DirectionRequest extends RestAPIRequest{
-    use RequestTrait;
-
-    public function __construct(string $action)
-    {
-        parent::__construct($action);
-    }
-}
