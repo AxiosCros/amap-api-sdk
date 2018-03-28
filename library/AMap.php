@@ -9,8 +9,6 @@
 
 namespace amap\sdk;
 
-use amap\sdk\core\AMapException;
-
 define("AMAP_PATH",__DIR__);
 
 class AMap
@@ -21,23 +19,18 @@ class AMap
 
     public static $request_base_url = "http://yuntuapi.amap.com/";
 
-    public static function auth($key, $secret = ""){
-        self::$key = $key;
-        self::$secret = $secret;
+    public static function auth($key = null, $secret = null){
+        self::$key = self::key($key);
+        self::$secret = self::secret($secret);
     }
 
     /**
      * @param null $key
      * @return string
-     * @throws AMapException
      */
     public static function key($key = null){
         if(is_null($key)){
             return self::$key;
-        }
-
-        if(!is_string($key)){
-            throw new AMapException("key error , must be string!");
         }
 
         self::$key = $key;
