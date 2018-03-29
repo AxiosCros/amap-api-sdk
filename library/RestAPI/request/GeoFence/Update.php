@@ -16,6 +16,7 @@ use amap\sdk\RestAPI\RestAPIRequest;
 /**
  * Class Update
  * @package amap\sdk\RestAPI\request\GeoFence
+ * @method $this setGid($gid)
  * @method $this setName($name)
  * @method $this setCenter($center)
  * @method $this setRadius($radius)

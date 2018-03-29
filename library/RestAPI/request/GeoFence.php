@@ -10,7 +10,9 @@
 namespace amap\sdk\RestAPI\request;
 
 use amap\sdk\RestAPI\request\GeoFence\Create;
+use amap\sdk\RestAPI\request\GeoFence\Delete;
 use amap\sdk\RestAPI\request\GeoFence\Find;
+use amap\sdk\RestAPI\request\GeoFence\Status;
 use amap\sdk\RestAPI\request\GeoFence\Update;
 
 class GeoFence
@@ -36,10 +38,29 @@ class GeoFence
     }
 
     /**
+     * @param $gid
      * @return Update
      */
-    public function update(){
+    public function update($gid){
         $request = new Update($this->action);
-        return $request;
+        return $request->setGid($gid);
+    }
+
+    /**
+     * @param $gid
+     * @return Delete
+     */
+    public function delete($gid){
+        $request = new Delete($this->action);
+        return $request->setGid($gid);
+    }
+
+    /**
+     * @param $diu
+     * @return Status
+     */
+    public function status($diu){
+        $request = new Status("v4/geofence/status");
+        return $request->setDiu($diu);
     }
 }
