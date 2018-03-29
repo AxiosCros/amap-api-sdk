@@ -12,7 +12,7 @@ namespace amap\sdk\RestAPI\request;
 use amap\sdk\core\exception\RestAPIException;
 
 /**
- * Class Geo
+ * 坐标转换
  * @package amap\sdk\RestAPI\request
  * @method GeoRequest code()
  * @method GeoRequest recode()
@@ -20,8 +20,8 @@ use amap\sdk\core\exception\RestAPIException;
 class Geo
 {
     protected $actionArray = [
-        'code'   => 'v3/geocode/geo',
-        'recode' => 'v3/geocode/regeo',
+        'code'   => 'v3/geocode/geo',//地理编码
+        'recode' => 'v3/geocode/regeo',//逆地理编码
     ];
 
     /**

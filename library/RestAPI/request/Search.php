@@ -11,12 +11,20 @@ namespace amap\sdk\RestAPI\request;
 
 use amap\sdk\core\exception\RestAPIException;
 
+/**
+ * Class Search
+ * @package amap\sdk\RestAPI\request
+ * @method SearchRequest keyword()
+ * @method SearchRequest around()
+ * @method SearchRequest polygon()
+ * @method SearchRequest detail()
+ */
 class Search {
     protected $actionArray = [
-        'keyword'   => 'v3/place/text',
-        'around'    => 'v3/place/around',
-        'polygon'   => 'v3/place/polygon',
-        'detail'    => 'v3/place/detail'
+        'keyword'   => 'v3/place/text',//关键字搜索
+        'around'    => 'v3/place/around',//周边搜索
+        'polygon'   => 'v3/place/polygon',//多边形搜索
+        'detail'    => 'v3/place/detail'//ID查询
     ];
 
     /**

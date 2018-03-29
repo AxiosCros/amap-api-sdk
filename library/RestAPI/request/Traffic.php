@@ -21,9 +21,9 @@ use amap\sdk\core\exception\RestAPIException;
 class Traffic
 {
     protected $actionArray = [
-        'rectangle' => 'traffic/status/rectangle',
-        'circle' => 'v3/traffic/status/circle',
-        'road' => 'v3/traffic/status/road'
+        'rectangle' => 'traffic/status/rectangle',//矩形区域交通态势
+        'circle' => 'v3/traffic/status/circle',//圆形区域交通态势
+        'road' => 'v3/traffic/status/road'//制定线路交通态势
     ];
 
     /**

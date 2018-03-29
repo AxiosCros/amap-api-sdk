@@ -13,6 +13,7 @@ use amap\sdk\core\traits\RequestTrait;
 use amap\sdk\RestAPI\RestAPIRequest;
 
 /**
+ * 行政区域查询
  * Class DistrictRequest
  * @package amap\sdk\RestAPI\request
  * @method $this setKeywords($keywords)

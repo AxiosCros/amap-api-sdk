@@ -20,6 +20,7 @@ class GeoFence
     private $action = "v4/geofence/meta";
 
     /**
+     * 创建围栏
      * @param $name
      * @return Create
      */
@@ -30,6 +31,7 @@ class GeoFence
     }
 
     /**
+     * 查询围栏
      * @return Find
      */
     public function find(){
@@ -38,6 +40,7 @@ class GeoFence
     }
 
     /**
+     * 更新围栏
      * @param $gid
      * @return Update
      */
@@ -47,6 +50,7 @@ class GeoFence
     }
 
     /**
+     * 删除围栏
      * @param $gid
      * @return Delete
      */
@@ -56,6 +60,7 @@ class GeoFence
     }
 
     /**
+     * 围栏设备监控
      * @param $diu
      * @return Status
      */
