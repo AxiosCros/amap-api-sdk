@@ -11,6 +11,7 @@ namespace amap\sdk\RestAPI\request;
 
 use amap\sdk\RestAPI\request\GeoFence\Create;
 use amap\sdk\RestAPI\request\GeoFence\Find;
+use amap\sdk\RestAPI\request\GeoFence\Update;
 
 class GeoFence
 {
@@ -31,6 +32,14 @@ class GeoFence
      */
     public function find(){
         $request = new Find($this->action);
+        return $request;
+    }
+
+    /**
+     * @return Update
+     */
+    public function update(){
+        $request = new Update($this->action);
         return $request;
     }
 }

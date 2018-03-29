@@ -16,6 +16,10 @@ use amap\sdk\RestAPI\RestAPIRequest;
 /**
  * Class Find
  * @package amap\sdk\RestAPI\request\GeoFence
+ * @method $this setId($id)
+ * @method $this setGid($gid)
+ * @method $this setName($name)
+ * @method $this setEnable($enable)
  */
 class Find extends RestAPIRequest
 {
@@ -25,5 +29,42 @@ class Find extends RestAPIRequest
     {
         parent::__construct($action);
         $this->setMethod(AMapOption::GET);
+    }
+
+    /**
+     * @param int $page_number
+     * @return $this
+     */
+    public function setPageNumber($page_number = 1){
+        $this->setParam("page_no",$page_number);
+        return $this;
+    }
+
+    /**
+     * @param $page_size
+     * @return $this
+     */
+    public function setPageSize($page_size){
+        $this->setParam("page_size",$page_size);
+        return $this;
+    }
+
+    /**
+     * @param $start_time
+     * @return $this
+     */
+    public function setStartTime($start_time){
+        $this->setParam("start_time",$start_time);
+        return $this;
+    }
+
+    /**
+     * @param $end_time
+     * @return $this
+     */
+    public function setEndTime($end_time)
+    {
+        $this->setParam("end_time",$end_time);
+        return $this;
     }
 }
