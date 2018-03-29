@@ -106,7 +106,7 @@ class AMapRequest
         ksort($param);
         $str = "";
         $n = 0;
-        foreach ($this->param as $k => $v) {
+        foreach ($param as $k => $v) {
             if ($n !== 0) {
                 $str .= "&";
             }
