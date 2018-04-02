@@ -16,6 +16,8 @@ class AMapOption
 
     const REST_API_REQUEST_BASE_URL = "restapi.amap.com/";
 
+    const URL_API_REQUEST_BASE_URL = "uri.amap.com/";
+
     const GET    = 'GET';
     const PUT    = 'PUT';
     const POST   = 'POST';
