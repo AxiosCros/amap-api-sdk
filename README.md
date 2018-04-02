@@ -8,6 +8,7 @@
 
 - [云图服务API](http://lbs.amap.com/api/yuntu/summary/?)
 - [Web服务API](https://lbs.amap.com/api/webservice/summary/)
+- [URL Api](http://lbs.amap.com/api/uri-api/summary)
 
 ## 安装
 ```shell
