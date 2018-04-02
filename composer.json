@@ -1,7 +1,7 @@
 {
   "name": "axios/amap-api-sdk",
   "description": "SDK for AMap API SDK",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": [
     "AMap",
     "SDK",
