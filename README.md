@@ -1,5 +1,9 @@
 # 高德地图API-SDK
 
+[![Latest Stable Version](https://poser.pugx.org/axios/amap-api-sdk/v/stable)](https://packagist.org/packages/axios/amap-api-sdk)
+[![License](https://poser.pugx.org/axios/amap-api-sdk/license)](https://packagist.org/packages/axios/amap-api-sdk)
+
+
 ## 高德开发文档
 
 - [云图服务API](http://lbs.amap.com/api/yuntu/summary/?)
